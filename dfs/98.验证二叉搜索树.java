@@ -49,7 +49,7 @@ package dfs;/*
 
 // @lc code=start
 
-import javax.swing.tree.TreeNode;
+
 
 /**
  * Definition for a binary tree node.
@@ -61,8 +61,20 @@ import javax.swing.tree.TreeNode;
  * }
  */
 class Solution {
+    TreeNode pre = null;
     public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+
+        if(!isValidBST(root.left)){
+            return false;
+        }
         
+        if(pre != null && root.val <= pre.val){
+            return false;
+        }
+        pre = root;
+
+        return isValidBST(root.right);
     }
 }
 // @lc code=end
